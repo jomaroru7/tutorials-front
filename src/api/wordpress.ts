@@ -25,15 +25,22 @@ function normalizeApiBase(rawValue: string) {
   }
 
   if (/^https?:\/\//i.test(value)) {
-    return value.replace(/\/$/, '')
+    return value
+      .replace(/\/wp-json\/wp\/v2\/posts\/?$/i, '')
+      .replace(/\/wp-json\/wp\/v2\/?$/i, '')
+      .replace(/\/$/, '')
   }
 
-  return `http://${value.replace(/^\/+/, '').replace(/\/$/, '')}`
+  return `http://${value
+    .replace(/^\/+/, '')
+    .replace(/\/$/, '')
+    .replace(/\/wp-json\/wp\/v2\/posts\/?$/i, '')
+    .replace(/\/wp-json\/wp\/v2\/?$/i, '')}`
 }
 
 const apiBase = normalizeApiBase(import.meta.env.VITE_WP_API_BASE_URL || '')
 const defaultHeaders = {
-  'Content-Type': 'application/json',
+  Accept: 'application/json',
 }
 
 function buildUrl(path: string, params: Record<string, string | number | boolean> = {}) {
@@ -47,14 +54,39 @@ function buildUrl(path: string, params: Record<string, string | number | boolean
   return url.toString()
 }
 
-async function request<T>(url: string) {
-  const response = await fetch(url, { headers: defaultHeaders })
+function buildPostsUrls(params: Record<string, string | number | boolean> = {}) {
+  return [
+    buildUrl('/wp-json/wp/v2/posts', params),
+    buildUrl('/index.php', { rest_route: '/wp/v2/posts', ...params }),
+  ]
+}
 
-  if (!response.ok) {
-    throw new Error(`WordPress API error: ${response.status} ${response.statusText}`)
+async function request<T>(urls: string[]) {
+  let lastError: Error | null = null
+
+  for (const url of urls) {
+    const response = await fetch(url, { headers: defaultHeaders })
+
+    if (!response.ok) {
+      lastError = new Error(`WordPress API error: ${response.status} ${response.statusText}`)
+      continue
+    }
+
+    const body = await response.text()
+
+    if (!body.trim()) {
+      lastError = new Error('La API de WordPress respondió sin contenido JSON')
+      continue
+    }
+
+    try {
+      return JSON.parse(body) as T
+    } catch {
+      lastError = new Error('La API de WordPress respondió con un formato no válido')
+    }
   }
 
-  return (await response.json()) as T
+  throw lastError ?? new Error('No se pudo cargar la respuesta de WordPress')
 }
 
 export async function getPosts(): Promise<Post[]> {
@@ -62,12 +94,7 @@ export async function getPosts(): Promise<Post[]> {
     throw new Error('VITE_WP_API_BASE_URL no está definido en el entorno')
   }
 
-  return request<Post[]>(
-    buildUrl('/wp-json/wp/v2/posts', {
-      per_page: 12,
-      _embed: true,
-    }),
-  )
+  return request<Post[]>(buildPostsUrls({ per_page: 12, _embed: true }))
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
@@ -75,12 +102,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     throw new Error('VITE_WP_API_BASE_URL no está definido en el entorno')
   }
 
-  const results = await request<Post[]>(
-    buildUrl('/wp-json/wp/v2/posts', {
-      slug,
-      _embed: true,
-    }),
-  )
+  const results = await request<Post[]>(buildPostsUrls({ slug, _embed: true }))
 
   return results.length > 0 ? results[0] : null
 }
