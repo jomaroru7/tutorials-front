@@ -31,8 +31,11 @@ export default function PostPage() {
 
   if (!selectedPost) {
     return (
-      <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-        <p className="text-slate-700">No se encontró el post solicitado.</p>
+      <div
+        className="rounded-3xl border bg-white/90 p-8 shadow-sm"
+        style={{ borderColor: 'var(--jm-line)', boxShadow: '0 14px 35px rgb(25 20 45 / 0.06)' }}
+      >
+        <p className="font-medium text-[var(--jm-text)]">No se encontró el post solicitado.</p>
       </div>
     )
   }

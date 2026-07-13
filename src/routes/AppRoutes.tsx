@@ -10,9 +10,12 @@ export default function AppRoutes() {
       <Route
         path="*"
         element={
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <h2 className="text-2xl font-semibold text-slate-900">Página no encontrada</h2>
-            <p className="mt-3 text-slate-600">Vuelve a la página principal para ver el listado de posts.</p>
+          <div
+            className="rounded-3xl border bg-white/90 p-8 text-center shadow-sm"
+            style={{ borderColor: 'var(--jm-line)', boxShadow: '0 14px 35px rgb(25 20 45 / 0.06)' }}
+          >
+            <h2 className="text-2xl font-extrabold text-[var(--jm-text)]">Página no encontrada</h2>
+            <p className="mt-3 text-[var(--jm-muted)]">Vuelve a la página principal para ver el listado de posts.</p>
           </div>
         }
       />

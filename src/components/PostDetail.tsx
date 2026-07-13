@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import type { Post } from '../api/wordpress'
 
 type PostDetailProps = {
@@ -6,12 +7,35 @@ type PostDetailProps = {
 
 export default function PostDetail({ post }: PostDetailProps) {
   return (
-    <article className="space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-      <div className="space-y-3">
-        <p className="text-sm uppercase tracking-[0.3em] text-slate-500">{new Date(post.date).toLocaleDateString('es-ES')}</p>
-        <h1 className="text-3xl font-semibold text-slate-900 sm:text-4xl">{post.title.rendered}</h1>
+    <article
+      className="space-y-6 rounded-3xl border bg-white/90 p-6 shadow-sm backdrop-blur sm:p-8"
+      style={{
+        borderColor: 'var(--jm-line)',
+        boxShadow: '0 18px 40px rgb(25 20 45 / 0.08)',
+      }}
+    >
+      <div>
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold text-[var(--jm-text)] transition hover:-translate-y-0.5"
+          style={{
+            borderColor: 'var(--jm-line)',
+            background: 'linear-gradient(120deg, rgb(207 0 255 / 0.12), rgb(127 0 255 / 0.08))',
+          }}
+        >
+          <span aria-hidden="true">←</span>
+          Volver al inicio
+        </Link>
       </div>
-      <div className="prose max-w-none text-slate-700" dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+
+      <div className="space-y-3">
+        <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--jm-accent-2)]">{new Date(post.date).toLocaleDateString('es-ES')}</p>
+        <h1 className="text-3xl font-extrabold leading-tight text-[var(--jm-text)] sm:text-4xl">{post.title.rendered}</h1>
+      </div>
+      <div
+        className="prose max-w-none text-[var(--jm-text)] prose-a:text-[var(--jm-accent-2)] prose-headings:text-[var(--jm-text)] prose-p:text-[var(--jm-muted)]"
+        dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+      />
     </article>
   )
 }

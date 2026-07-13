@@ -19,10 +19,16 @@ export default function HomePage() {
 
   return (
     <section className="space-y-8">
-      <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-        <p className="text-sm uppercase tracking-[0.3em] text-slate-500">Headless WordPress</p>
-        <h1 className="mt-4 text-4xl font-semibold text-slate-900 sm:text-5xl">Listado de posts</h1>
-        <p className="mt-4 max-w-2xl text-slate-600">Conecta directamente con la API REST de WordPress y muestra los posts para navegación en el frontend.</p>
+      <div
+        className="rounded-3xl border bg-white/90 p-6 shadow-sm sm:p-8"
+        style={{
+          borderColor: 'var(--jm-line)',
+          boxShadow: '0 14px 35px rgb(25 20 45 / 0.06)',
+        }}
+      >
+        <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--jm-accent-2)]">Jomaroru</p>
+        <h1 className="mt-4 text-4xl font-extrabold leading-tight text-[var(--jm-text)] sm:text-5xl">Tutoriales</h1>
+        <p className="mt-4 max-w-2xl text-[var(--jm-muted)]">Este blog será una colección de tutoriales sobre desarrollo web o configuración y despliegue en la nube.</p>
       </div>
 
       {status === 'loading' && <Loading />}
