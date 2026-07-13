@@ -7,7 +7,7 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen text-[var(--jm-text)]">
+    <div className="relative flex min-h-screen flex-col text-[var(--jm-text)]">
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-white/60 to-transparent" />
 
       <header className="sticky top-0 z-10 border-b bg-[rgb(231_231_234_/_0.8)] backdrop-blur-md" style={{ borderColor: 'var(--jm-line)' }}>
@@ -21,7 +21,31 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:py-12">{children}</main>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:py-12">{children}</main>
+
+      <footer className="border-t py-6 border-purple-500 bg-[rgb(231_231_234_/_0.8)]">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-4 text-sm text-[var(--jm-muted)] sm:flex-row sm:items-center ">
+          <p>Hecho por Jose Maria Romero Ruiz</p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://jomaroru.dev/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-[var(--jm-text)] transition hover:text-[var(--jm-accent-2)]"
+            >
+              Portfolio
+            </a>
+            <a
+              href="https://www.linkedin.com/in/jomaroru"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-[var(--jm-text)] transition hover:text-[var(--jm-accent-2)]"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
