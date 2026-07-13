@@ -65,7 +65,14 @@ async function request<T>(urls: string[]) {
   let lastError: Error | null = null
 
   for (const url of urls) {
-    const response = await fetch(url, { headers: defaultHeaders })
+    let response: Response
+
+    try {
+      response = await fetch(url, { headers: defaultHeaders })
+    } catch {
+      lastError = new Error('No se pudo conectar con la API de WordPress (CORS o red)')
+      continue
+    }
 
     if (!response.ok) {
       lastError = new Error(`WordPress API error: ${response.status} ${response.statusText}`)
