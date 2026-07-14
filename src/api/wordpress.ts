@@ -2,6 +2,7 @@ export type Post = {
   id: number
   slug: string
   date: string
+  categories?: string[]
   title: {
     rendered: string
   }
@@ -14,6 +15,7 @@ export type Post = {
   _embedded?: {
     'wp:featuredmedia'?: Array<{ source_url: string; alt_text: string }>
     author?: Array<{ name: string }>
+    'wp:term'?: Array<Array<{ id: number; name: string; taxonomy: string }>>
   }
 }
 

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Post } from '../api/wordpress'
+import PostCategories from './PostCategories'
 
 type PostDetailProps = {
   post: Post
@@ -31,6 +32,7 @@ export default function PostDetail({ post }: PostDetailProps) {
       <div className="space-y-3">
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--jm-accent-2)]">{new Date(post.date).toLocaleDateString('es-ES')}</p>
         <h1 className="text-3xl font-extrabold leading-tight text-[var(--jm-text)] sm:text-4xl">{post.title.rendered}</h1>
+        <PostCategories post={post} className="pt-1" />
       </div>
       <div
         className="post-content max-w-none text-[var(--jm-text)]"

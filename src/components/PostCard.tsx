@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Post } from '../api/wordpress'
+import PostCategories from './PostCategories'
 
 type PostCardProps = {
   post: Post
@@ -18,6 +19,7 @@ export default function PostCard({ post }: PostCardProps) {
         <div className="flex items-center gap-2 text-sm font-medium text-[var(--jm-muted)]">
           <span>{new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
         </div>
+        <PostCategories post={post} />
         <h2 className="text-xl font-extrabold text-[var(--jm-text)] transition group-hover:text-[var(--jm-accent-2)]">
           <Link to={`/post/${post.slug}`} className="inline-flex w-full">
             {post.title.rendered}
