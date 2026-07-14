@@ -28,7 +28,7 @@ export default function HomePage() {
       >
         <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--jm-accent-2)]">Jomaroru</p>
         <h1 className="mt-4 text-4xl font-extrabold leading-tight text-[var(--jm-text)] sm:text-5xl">Tutoriales</h1>
-        <p className="mt-4 max-w-2xl text-[var(--jm-muted)]">Este blog será una colección de tutoriales sobre desarrollo web o configuración y despliegue en la nube.</p>
+        <p className="mt-4 text-[var(--jm-muted)]">Este blog será una colección de tutoriales sobre desarrollo web o configuración y despliegue en la nube.</p>
       </div>
 
       {status === 'loading' && <Loading />}
