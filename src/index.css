@@ -44,4 +44,32 @@
 		@apply rounded-3xl border bg-white/85 shadow-sm backdrop-blur;
 		border-color: var(--jm-line);
 	}
+
+	
+
+	.post-content p {
+		margin: 1rem 0 1rem 0;
+		color: var(--jm-muted);
+		text-align: justify;
+	}
+
+	.post-content img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		border: 1px solid #000;
+	}
+
+	.post-content a {
+		color: var(--jm-accent-2);
+	}
+
+	.post-content h1,
+	.post-content h2,
+	.post-content h3,
+	.post-content h4,
+	.post-content h5,
+	.post-content h6 {
+		color: var(--jm-text);
+	}
 }

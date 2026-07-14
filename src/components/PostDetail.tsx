@@ -33,7 +33,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         <h1 className="text-3xl font-extrabold leading-tight text-[var(--jm-text)] sm:text-4xl">{post.title.rendered}</h1>
       </div>
       <div
-        className="prose max-w-none text-[var(--jm-text)] prose-a:text-[var(--jm-accent-2)] prose-headings:text-[var(--jm-text)] prose-p:text-[var(--jm-muted)]"
+        className="post-content max-w-none text-[var(--jm-text)]"
         dangerouslySetInnerHTML={{ __html: post.content.rendered }}
       />
     </article>
