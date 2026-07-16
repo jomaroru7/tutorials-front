@@ -53,6 +53,47 @@
 		text-align: justify;
 	}
 
+	.post-content ul,
+	.post-content ol {
+		margin: 1rem 0;
+		padding-left: 1.6rem;
+		color: var(--jm-muted);
+	}
+
+	.post-content ul {
+		list-style-type: disc;
+	}
+
+	.post-content ol {
+		list-style-type: decimal;
+	}
+
+	.post-content li {
+		margin: 0.4rem 0;
+		padding-left: 0.15rem;
+	}
+
+	.post-content li > ul,
+	.post-content li > ol {
+		margin: 0.5rem 0 0.2rem;
+	}
+
+	.post-content ul ul {
+		list-style-type: circle;
+	}
+
+	.post-content ul ul ul {
+		list-style-type: square;
+	}
+
+	.post-content ol ol {
+		list-style-type: lower-alpha;
+	}
+
+	.post-content ol ol ol {
+		list-style-type: lower-roman;
+	}
+
 	.post-content img {
 		display: block;
 		max-width: 100%;
